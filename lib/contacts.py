@@ -19,6 +19,7 @@ class Contact(BaseModel):
     birthday = DateField()
 
 
+db.drop_tables([Contact])
 db.create_tables([Contact])
 
 michael = Contact(first_name='Michael', last_name='Hall',
@@ -36,3 +37,21 @@ steve.save()
 lisa = Contact(first_name='Lisa', last_name='Bonet',
                phone='545-5555', birthday=date(1986, 1, 17))
 lisa.save()
+
+
+def contact_book():
+    print('  1: Contacts \n 2: Make Contact \n 3: Update Contact \n 4: Delete Contact \n 5: Exit')
+    choice = input('Enter the category: ')
+    if choice == '1':
+        contact()
+    elif choice == '2':
+        make_contact()
+    elif choice == '3':
+        update_contact()
+    elif choice == '4':
+        delete_contact()
+    else:
+        exit()
+
+
+contact_book()
