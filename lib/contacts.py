@@ -20,3 +20,8 @@ class Contact(BaseModel):
 
 
 db.create_tables([Contact])
+
+michael = Contact(first_name='Michael', last_name='Hall',
+                  phone='555-5555', birthday=date(1985, 2, 20))
+
+michael.save()
