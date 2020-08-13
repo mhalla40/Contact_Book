@@ -54,4 +54,14 @@ def contact_book():
         exit()
 
 
+def contact():
+    contacts = Contact.select()
+    for contact in contacts:
+        print(
+            f'Full Name: {contact.first_name} {contact.last_name} \n Phone Number: {contact.phone} \n Birthday: {contact.birthday}')
+    quit = input("To go back to the Main Menu, type 'exit': ")
+    if quit == 'exit':
+        contact_book()
+
+
 contact_book()
