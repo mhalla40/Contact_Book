@@ -116,4 +116,21 @@ def update_contact():
             contact_book()
 
 
+def delete_contact():
+    people = Contact.select()
+    for contact in people:
+        print(contact.first_name)
+    out = input('Choose contact to delete: ')
+    if out == Contact.first_name:
+        done = input('Are you sure you want to delete? y/n: ')
+        if done == 'y':
+            contact = Contact.get(Contact.first_name == out)
+            contact.delete_instance()
+            contact_book()
+        else:
+            delete_contact()
+    else:
+        contact_book()
+
+
 contact_book()
