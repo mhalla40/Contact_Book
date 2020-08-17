@@ -55,13 +55,65 @@ def contact_book():
 
 
 def contact():
-    contacts = Contact.select()
-    for contact in contacts:
-        print(
-            f'Full Name: {contact.first_name} {contact.last_name} \n Phone Number: {contact.phone} \n Birthday: {contact.birthday}')
-    quit = input("To go back to the Main Menu, type 'exit': ")
-    if quit == 'exit':
+    people = Contact.select()
+    for contact in people:
+        print(contact.first_name)
+    name = input("Enter name or type 'exit' to go to main menu: ")
+    if name == 'exit':
         contact_book()
+    contact = Contact.get(Contact.first_name == name)
+    print(
+        f'Full Name: {contact.first_name} {contact.last_name} \n Phone Number: {contact.phone} \n Birthday: {contact.birthday}')
+    contact_book()
+
+
+def make_contact():
+    new_first_name = input('Enter First name: ')
+    new_last_name = input('Enter last name: ')
+    new_phone_number = input('Enter phone number: ')
+    new_birthday = input('Enter birthday: ')
+
+    add_contact = Contact(
+        first_name=new_first_name,
+        last_name=new_last_name,
+        phone=new_phone_number,
+        birthday=new_birthday
+    )
+
+    add_contact.save()
+    contact_book()
+
+
+def update_contact():
+    people = Contact.select()
+    for contact in people:
+        print(contact.first_name)
+    name = input('Enter name to update: ')
+    if name == Contact.first_name:
+        print('1: First Name \n 2: Last Name \n 3: Phone Number \n 4: Birthday')
+        choice = input('Enter number to update: ')
+        if choice == '1':
+            contact = Contact.get(Contact.first_name == name)
+            contact.first_name = input('New First Name: ')
+            contact.save()
+            contact_book()
+        elif choice == '2':
+            contact = Contact.get(Contact.first_name == name)
+            contact.last_name = input('New Last Name: ')
+            contact.save()
+            contact_book()
+        elif choice == '3':
+            contact = Contact.get(Contact.first_name == name)
+            contact.phone = input('New Phone Number: ')
+            contact.save()
+            contact_book()
+        elif choice == '4':
+            contact = Contact.get(Contact.first_name == name)
+            contact.birthday = input('New Birthday: ')
+            contact.save()
+            contact_book()
+        else:
+            contact_book()
 
 
 contact_book()
